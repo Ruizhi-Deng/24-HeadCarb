@@ -5,6 +5,7 @@
 #include "basic-functions.h"
 #include "auton-functions.h"
 
+void auton_test();
 void auton_near_1(void);
 void auton_near_2(void);
 void auton_far_1(void);

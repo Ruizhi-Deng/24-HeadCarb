@@ -9,7 +9,7 @@ class MyTimer{
     float startTime;
   public:
     MyTimer();
-    MyTimer(float);
+    // MyTimer(float);
     void reset();
     int getTime() const;
 };
