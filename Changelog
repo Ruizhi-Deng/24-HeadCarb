@@ -1,0 +1,12 @@
+# Changelog
+
+## ### Remained Bugs -> Ver 0.0.1
+
+- 疑似底盘右侧动力不足 不能直进直退 目前不清楚原因  
+    main.cpp里的ch1 ch2乘上了奇怪的系数
+
+## [Version 0.0.1] - 2023-12-15
+
+### Added
+
+- New code from scratch
