@@ -308,21 +308,38 @@ bool RemoteControlCodeEnabled = true;
  * This should be called at the start of your int main function.
  */
 void vexcodeInit( void ) {
-  // nothing to initialize
+    wait(1000, msec);
+    // setPistonE1(false);
+    // setPistonE2(false);
+
+    Brain.Screen.setCursor(1, 1);
+    Brain.Screen.print("IMU Calibrating");
+    IMU.startCalibration();
+    while (IMU.isCalibrating()) {
+    }
+    wait(1000, msec);
+    Brain.Screen.setCursor(2, 1);
+    Brain.Screen.print("Done");
+    wait(500, msec);
+    Brain.Screen.clearScreen();
+
+    // thread Intake(intake);
+    // thread Catapult(catapult);
+    // thread GPSPosition(MyGpsPos);
 }
 
 #ifdef ROBOT13
-  motor Motor_BaseLF = motor(PORT20, ratio6_1, true);
-  motor Motor_BaseLM = motor(PORT19, ratio6_1, true);
-  motor Motor_BaseLB = motor(PORT18, ratio6_1, true);
-  motor Motor_BaseRF = motor(PORT11, ratio6_1, false);
-  motor Motor_BaseRM = motor(PORT12, ratio6_1, false);
-  motor Motor_BaseRB = motor(PORT13, ratio6_1, false);
-  motor Motor_Intake1 = motor(PORT14, ratio6_1, false);
+  motor Motor_BaseLF = motor(PORT7, ratio6_1, true);
+  motor Motor_BaseLM = motor(PORT9, ratio6_1, true);
+  motor Motor_BaseLB = motor(PORT8, ratio6_1, true);
+  motor Motor_BaseRF = motor(PORT19, ratio6_1, false);
+  motor Motor_BaseRM = motor(PORT18, ratio6_1, false);
+  motor Motor_BaseRB = motor(PORT17, ratio6_1, false);
+  motor Motor_Intake1 = motor(PORT15, ratio6_1, false);
 
-  motor Motor_Cata1 = motor(PORT9, ratio36_1, true);
+  // // motor Motor_Cata1 = motor(PORT9, ratio36_1, true);
 
-  inertial IMU = inertial(PORT16);
+  inertial IMU = inertial(PORT12);
   led PistonE1 = led(Brain.ThreeWirePort.A); //Extension 1
   led PistonE2 = led(Brain.ThreeWirePort.H); //Extension 2
   led PistonHook = led(Brain.ThreeWirePort.D); //Hook

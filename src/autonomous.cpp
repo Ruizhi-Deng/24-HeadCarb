@@ -5,16 +5,21 @@
 #include "robot-config.h"
 
 void autonInit(void) {
-    setPistonE1(false);
-    setPistonHook(false);
+    // setPistonE1(false);
+    // setPistonHook(false);
     resetHeading();
     resetForwardPos();
-    MyGps.resetForwardPosGps();
+    // MyGps.resetForwardPosGps();
 }
 
 void auton_test() {
     MyTimer autotimer;
     autotimer.reset();
+    setIntakeSpeed(100);
+    // timerForward(100,3000);
+    // PIDPosForwardAbs(1000);
+    posForwardRelWithHeading(100,100000,0);
+    lockBase();
 }
 
 void auton_near_1() {
@@ -217,13 +222,25 @@ void runAuton(int auton_choose) {
     autonFlipper(true);
     autonInit();
 
-    if (auton_choose == 1)
+    switch (auton_choose) {
+    case 0:
+        auton_test();
+        break;
+    case 1:
         auton_near_1(); // 1+1+2 near
-    else if (auton_choose == 2)
-        auton_near_2(); //
-    else if (auton_choose == 3)
+        break;
+    case 2:
+        auton_near_2();
+        break;
+    case 3:
         auton_far_1(); // 3+0+0 far
-    else if (auton_choose == 4)
-        auton_far_2(); //
+        break;
+    case 4:
+        auton_far_2();
+        break;
+    default:
+        // Handle invalid auton_choose value
+        break;
+    }
 }
 // #endif

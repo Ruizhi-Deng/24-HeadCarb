@@ -113,6 +113,8 @@ static volatile int target_blue = 0;
 
 
 #ifdef ROBOT13
+  static const float LEFT_MAX_SPD = 82;
+  static const float LEFT_DELTA_SPD = 100-LEFT_MAX_SPD;
   static const float WHEEL_DIAMETER = 4;
   static const float CHASSIS_GEAR_RATIO = 0.5;
   static const float CHASSISRADIUS = 156;

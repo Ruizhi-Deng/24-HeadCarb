@@ -34,7 +34,6 @@ void unlockBase(void);
 float getCrtVel();
 
 // Input functions
-
 float getLeftPos();
 float getRightPos();
 float getForwardPos();

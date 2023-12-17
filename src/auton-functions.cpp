@@ -100,12 +100,19 @@ void posForwardRelWithHeading(float _power, float _targetPos, float _targetHeadi
     float startPos = getForwardPos();
     while (fabs(getForwardPos() - startPos) < fabs(_targetPos)) {
         float headingError = deg2range(_targetHeading - getHeading());
-        float powerTurn = headingError * 3.0; // kp = 2.0
-        if (fabs(powerTurn) > 20)
-            powerTurn = sign(powerTurn) * 20; // PLimit = 20
+        float powerTurn = headingError * 10.0; // kp = 3.0
+        if (fabs(powerTurn) > 100)
+            powerTurn = sign(powerTurn) * 100; // PLimit = 100
+
+        Brain.Screen.setCursor(1, 1);
+        Brain.Screen.print("TAR: %.2f|CURR: %.2f|ERR: %.2f|PTURN: %.2f", _targetHeading,
+                           getHeading(), headingError, powerTurn);
+
         moveLeft(_power + powerTurn);
         moveRight(_power - powerTurn);
-        this_thread::sleep_for(5);
+
+        this_thread::sleep_for(50);
+        Brain.Screen.clearScreen();
     }
     unlockBase();
 }
@@ -156,7 +163,7 @@ void PIDPosForwardAbs(float _target) {
 
 /**
  * Moves the robot forward to a relative target position using PID control.
- * 
+ *
  * @param _target The relative target position to move to.
  */
 void PIDPosForwardRel(float _target) {
@@ -167,7 +174,7 @@ void PIDPosForwardRel(float _target) {
 
 /**
  * @brief Performs a PID control to move the robot to a target position with a curved path.
- * 
+ *
  * @param left_target The target position for the left side of the robot.
  * @param right_target The target position for the right side of the robot.
  * @param tolerance The acceptable error tolerance for reaching the target position.
@@ -212,7 +219,7 @@ void PIDPosCurveRel(float left_target, float right_target, float tolerance) {
 
 /**
  * Calculates the PID control for position curve with absolute target values.
- * 
+ *
  * @param left_target The target value for the left side.
  * @param right_target The target value for the right side.
  * @param tolerance The tolerance for error in position.
@@ -242,7 +249,7 @@ void softStartTimerForward(float _powerInit, float _powerFinal, int _duration) {
 
 /**
  * @brief Rotates the timer for a specified duration with a given power.
- * 
+ *
  * @param _power The power at which to rotate the timer.
  * @param _duration The duration for which to rotate the timer.
  */
@@ -300,7 +307,7 @@ void PIDAngleRotateRel(float _target) {
 
 /**
  * @brief Rotate the robot to an absolute angle using PID control.
- * 
+ *
  * @param _target The target angle to rotate to.
  * @param kp The proportional gain for PID control.
  * @param ki The integral gain for PID control.
@@ -335,8 +342,9 @@ void PIDAngleRotateAbs(float _target, float kp, float ki, float kd, float tolera
 }
 
 /**
- * This function gradually increases the power from _powerInit to _powerFinal over a specified duration.
- * 
+ * This function gradually increases the power from _powerInit to _powerFinal over a specified
+ * duration.
+ *
  * @param _powerInit The initial power value.
  * @param _powerFinal The final power value.
  * @param _duration The duration over which the power is gradually increased.
@@ -355,7 +363,7 @@ void softStartTimerRotate(float _powerInit, float _powerFinal, int _duration) {
 
 /**
  * Waits for a specified amount of time.
- * 
+ *
  * @param _waittime The time to wait in seconds.
  */
 void timerWait(float _waittime) { this_thread::sleep_for(_waittime); }
