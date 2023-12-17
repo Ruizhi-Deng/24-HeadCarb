@@ -23,7 +23,7 @@ void voltageForward(float _power) {
 /**
  * Moves the base forward at a specified power for a specified duration.
  * This function does not stop the base when finishing.
- *
+ * 
  * @param _power The power at which to move the base forward.
  * @param _duration The duration in milliseconds for which to move the base
  * forward.
