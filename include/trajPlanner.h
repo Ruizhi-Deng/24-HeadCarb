@@ -19,7 +19,7 @@ class Traj {
     Traj(int n) {
         // for(int i = 0; i <= 3; ++i)
         //     c[i] = new double[n];
-    }
+    } 
     void push(Point p) {
         wayPoint.push_back(p);
     }
