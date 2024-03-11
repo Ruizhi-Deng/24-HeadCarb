@@ -40,7 +40,7 @@ void PID::update(float input)
     P = kp * errorCurt;
     if (firstTime)
     { // first time to update
-        firstTime = false;
+        firstTime = false;  
         errorPrev = errorCurt;
         errorInt = 0;
     }
